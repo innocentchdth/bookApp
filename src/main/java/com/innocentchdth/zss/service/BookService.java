@@ -10,7 +10,6 @@ public interface BookService {
 	 List<BookDto> getAllBooks();
 	BookDto getBookById(Long id);
    // void bookTransaction(TransactionRequestDto transactionRequestDto);
-	String bookTransaction();
 	}
 
 

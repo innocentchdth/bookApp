@@ -1,9 +1,5 @@
 package com.innocentchdth.zss.service;
 
-import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,19 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.innocentchdth.zss.dto.BookDto;
-import com.innocentchdth.zss.dto.CardDto;
-import com.innocentchdth.zss.dto.TransactionRequestDto;
-import com.innocentchdth.zss.dto.TransactionResponseDto;
 import com.innocentchdth.zss.exceptions.BookNotFoundException;
 import com.innocentchdth.zss.exceptions.DuplicateResourceException;
 import com.innocentchdth.zss.model.Book;
@@ -32,15 +18,9 @@ import com.innocentchdth.zss.repository.BookRepository;
 
 @Service
 public class BookServiceImpl implements BookService {
-	
-	@Value("${apiKey}")
-	private String apiKey ;
-	
-	/*
-	 * @Autowired public TransactionResponseDto requestDto;
-	 */
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BookServiceImpl.class);
+
 	private final BookRepository bookRepository;
 
 	private final ModelMapper modelMapper;
@@ -49,6 +29,7 @@ public class BookServiceImpl implements BookService {
 	public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper) {
 		this.bookRepository = bookRepository;
 		this.modelMapper = modelMapper;
+
 	}
 
 	@Override
@@ -90,43 +71,12 @@ public class BookServiceImpl implements BookService {
 		return books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
 	}
 
-	@Override
-	public String bookTransaction() {
-		RestTemplate restTemplate = new RestTemplate();
-		
-	TransactionRequestDto requestDto = new TransactionRequestDto();
-	ZonedDateTime zonedDateTime = ZonedDateTime.parse("2021-06-10T13:22:30.746+02:00");
-	CardDto card = new CardDto("1234560000000001", new Date(2020-01-01));
-		requestDto.setType("PURCHASE");
-		requestDto.setExtendedType("NONE");
-		requestDto.setAmount(123.33);
-		requestDto.setCreated(zonedDateTime);
-		requestDto.setReference("6b82427b-9e9d-4d14-ae35-1e2e8c827c1d");
-		requestDto.setNarration("Test Narration");
-		requestDto.setCard(card);;
-		requestDto.setAdditionalData(new HashMap<String, Object>() {
-			/**
-			* 
-			*/
-			private static final long serialVersionUID = 1L;
-
-			{
-				put("SampleKey", "This is a sample value");
-
-			}
-		});
-
-		HttpHeaders headers = new HttpHeaders();
-		// set `content-type` header
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		// set `accept` header
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.add("Authorization", "Bearer " + apiKey);
-
-		HttpEntity<TransactionRequestDto> entity = new HttpEntity<>(requestDto, headers);
-
-		ResponseEntity<Object> response = restTemplate
-				.exchange("https://lab.v.co.zw/interview/api/transaction", HttpMethod.POST, entity, Object.class);
-		return response.getBody().toString();
-
-}}
+	/*
+	 * @Override public void bookTransaction(TransactionRequestDto
+	 * transactionRequestDto) { transactionRequestDto =
+	 * restTemplate.postForObject(uri, transactionRequestDto,
+	 * TransactionRequestDto.class);
+	 * 
+	 * }
+	 */
+}
