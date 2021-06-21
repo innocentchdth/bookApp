@@ -15,11 +15,6 @@
 #### Given more time
 * I would have used TDD approach, improve the response from the transaction endpoint. I couldn't finish integrating the transaction API due to time limitations from my end.   
 
-### Dependencies
-
-* Project Lombok
-* Swagger
-
 ### Running the Application
 * Clone the repository
 * Create a PostgreSQL DB use credentials in the application.properties file 
