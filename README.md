@@ -1,19 +1,6 @@
-# BookApp - Backend Skills test
+# BookApp
 
 * Spring Boot, Maven, PostgreSQL
-
-## Assumptions
-
-* A book has one category.
-
-* A new category can be created when cereating a book.
-
-* Book title isn't unique.
-* The success of Purchase Transaction API has no association  with the number of books available in the database.
-
-* TDD approach isnt required. 
-#### Given more time
-* I would have used TDD approach, improve the response from the transaction endpoint. I couldn't finish integrating the transaction API due to time limitations from my end.   
 
 ### Running the Application
 * Clone the repository
